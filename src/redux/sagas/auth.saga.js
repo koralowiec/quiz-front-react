@@ -1,5 +1,5 @@
 import { put, takeLatest } from 'redux-saga/effects'
-import { loggedIn } from '../actions'
+import { loggedIn, notLoggedIn } from '../actions'
 import { LOG_IN } from '../constants/ActionTypes'
 
 function* logInUser(action) {
@@ -15,9 +15,10 @@ function* logInUser(action) {
   }).then(response => response)
 
   if (response.status !== 201) {
-    yield response.json().then(json => console.log('json', json))
+    yield put(notLoggedIn())
   } else {
-    yield put(loggedIn())
+    const token = yield response.json().then(json => json.token)
+    yield put(loggedIn(token))
   }
 }
 

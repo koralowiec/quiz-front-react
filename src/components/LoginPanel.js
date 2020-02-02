@@ -16,6 +16,8 @@ const LoginPanel = ({ onLogin, onLogOut, isLoggedIn, loggedUsername }) => {
           <Button
             onClick={() => {
               onLogOut()
+              setUsername('')
+              setPassword('')
             }}
           >
             Log Out

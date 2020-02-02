@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes'
+export * from './quizzes.actions'
 
 export const logIn = (username, password) => ({
   type: types.LOG_IN,
@@ -6,8 +7,9 @@ export const logIn = (username, password) => ({
   password
 })
 
-export const loggedIn = () => ({
-  type: types.LOGGED_IN
+export const loggedIn = token => ({
+  type: types.LOGGED_IN,
+  token
 })
 
 export const notLoggedIn = () => ({
