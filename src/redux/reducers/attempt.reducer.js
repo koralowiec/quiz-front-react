@@ -1,16 +1,33 @@
 import * as types from '../constants/attempt.action-types'
 
-export const attempt = (state = {}, action) => {
+const initState = {}
+
+export const attempt = (state = initState, action) => {
   switch (action.type) {
     case types.MAKE_AN_ATTEMPT:
       return {
+        ...state,
         creating: true
       }
     case types.MADE_THE_ATTEMPT:
-      console.log('r', action)
-      return { attempt: action.attempt }
+      return Object.assign({}, state, {
+        details: action.attempt,
+        creating: false
+      })
     case types.ERROR_DURING_MAKING_THE_ATTEMPT:
-      return { error: true }
+      return { ...state, error: true }
+
+    case types.GOT_QUESTIONS_WITH_OPTIONS: {
+      return Object.assign({}, state, { questions: action.questions })
+    }
+    case types.ANSWERED_THE_QUESTION:
+      return state
+    case types.ERROR_DURING_ANSWERING_THE_QUESTION:
+      return state
+    case types.ENDED_ATTEMPT:
+      return Object.assign({}, state, {
+        details: action.details
+      })
     default:
       return state
   }

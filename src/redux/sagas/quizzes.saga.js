@@ -9,7 +9,6 @@ function* getQuizzes() {
     .then(respone => respone)
     .catch(e => console.error(e))
 
-  console.log('quizzes', respone)
   if (respone.status !== 200) {
     yield put(errorDuringGettingAllQuizzes())
   } else {

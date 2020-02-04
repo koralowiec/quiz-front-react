@@ -2,19 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './QuizzesListElement.css'
 import { Button } from '@material-ui/core'
+import { Link } from '@reach/router'
 
 const QuizzesListElement = ({ quiz, onMakeAnAttemptClick }) => {
   return (
     <div id="QuizzesListElement">
       <div id="quiz-title">{quiz.title}</div>
       <div id="quiz-description">{quiz.description}</div>
-      <Button
-        onClick={() => {
-          onMakeAnAttemptClick(quiz.id)
-        }}
-      >
-        Make an attempt
-      </Button>
+      <Link to="/quiz">
+        <Button
+          onClick={() => {
+            onMakeAnAttemptClick(quiz.id)
+          }}
+        >
+          Make an attempt
+        </Button>
+      </Link>
     </div>
   )
 }

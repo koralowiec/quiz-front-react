@@ -3,7 +3,6 @@ import { loggedIn, notLoggedIn } from '../actions'
 import { LOG_IN } from '../constants/ActionTypes'
 
 function* logInUser(action) {
-  console.log('logInUser', action)
   const { username, password } = action
   const response = yield fetch('http://localhost:3000/api/auth/signIn', {
     method: 'POST',

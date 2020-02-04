@@ -42,7 +42,6 @@ const LoginPanel = ({ onLogin, onLogOut, isLoggedIn, loggedUsername }) => {
           <div className="login-btn">
             <Button
               onClick={() => {
-                console.log('Log In Clicked', username, password)
                 onLogin(username, password)
               }}
             >

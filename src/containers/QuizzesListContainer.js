@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getAllQuizzes: () => dispatch(getAllQuizzes()),
-  makeAnAttempt: quizId => dispatch(makeAnAttempt(quizId))
+  makeAnAttemptAndFetchQuestions: quizId => dispatch(makeAnAttempt(quizId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuizzesList)
