@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import QuestionPanel from './QuestionPanel'
+import './QuestionPage.css'
 
 const QuestionPage = ({ questions, saveAnswer }) => {
   const [currentQuestionIndex, setCurentQuestionIndex] = useState(0)
@@ -27,10 +29,26 @@ const QuestionPage = ({ questions, saveAnswer }) => {
   }
 
   return (
-    <>
-      <div>Question {currentQuestionIndex + 1}</div>
-      {questions ? questionPanels()[currentQuestionIndex] : <p>loading...</p>}
-    </>
+    <div id="QuestionPage">
+      <p>Question {currentQuestionIndex + 1}:</p>
+      <div>
+        {questions ? questionPanels()[currentQuestionIndex] : <p>loading...</p>}
+      </div>
+    </div>
+  )
+}
+
+QuestionPage.propTypes = {
+  questions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      options: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          text: PropTypes.string.isRequired
+        })
+      )
+    })
   )
 }
 

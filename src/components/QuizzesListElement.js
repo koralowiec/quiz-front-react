@@ -7,8 +7,10 @@ import { Link } from '@reach/router'
 const QuizzesListElement = ({ quiz, onMakeAnAttemptClick }) => {
   return (
     <div id="QuizzesListElement">
-      <div id="quiz-title">{quiz.title}</div>
-      <div id="quiz-description">{quiz.description}</div>
+      <div>
+        <div id="quiz-title">{quiz.title}</div>
+        <div id="quiz-description">{quiz.description}</div>
+      </div>
       <Link to="/quiz">
         <Button
           onClick={() => {

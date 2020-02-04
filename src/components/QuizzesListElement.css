@@ -1,7 +1,9 @@
 #QuizzesListElement {
-  background-color: rgb(192, 192, 192);
+  background-color: #6ec6ff;
   padding: 2%;
   margin: 2%;
+  display: flex;
+  justify-content: space-between;
 }
 
 #quiz-title {

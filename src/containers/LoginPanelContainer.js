@@ -4,7 +4,8 @@ import { logIn, logOut } from '../redux/actions'
 
 const mapStateToProps = state => ({
   isLoggedIn: state.auth.logged,
-  loggedUsername: state.auth.username
+  loggedUsername: state.auth.username,
+  error: state.auth.error
 })
 
 const mapDispatchToProps = dispatch => ({

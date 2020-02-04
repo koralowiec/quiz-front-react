@@ -5,25 +5,25 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import LoginPanelContainer from './containers/LoginPanelContainer'
 import QuizzesListContainer from './containers/QuizzesListContainer'
-import { Router, Link } from '@reach/router'
+import { Router } from '@reach/router'
 import QuestionPageContainer from './containers/QuestionPageContainer'
 import AttemptResultContainer from './containers/AttemptResultContainer'
+import './App.css'
+import HeaderContainer from './containers/HeaderContainer'
+import FooterContainer from './containers/FooterContainer'
 
 const App = () => {
   return (
     <Provider store={store}>
-      <div>
-        <header>
-          <div>Quizzes</div>
-          <Link to="/">Home</Link>
-          <Link to="/login">Login</Link>
-        </header>
+      <div id="App">
+        <HeaderContainer />
         <Router>
           <QuizzesListContainer path="/" />
           <LoginPanelContainer path="/login" />
           <QuestionPageContainer path="/quiz" />
           <AttemptResultContainer path="/quiz/result" />
         </Router>
+        <FooterContainer />
       </div>
     </Provider>
   )

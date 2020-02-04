@@ -1,5 +1,7 @@
 #LoginPanel {
-  margin: 10%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 .input {
@@ -8,4 +10,9 @@
 
 .login-btn {
   margin: 15px 10px;
+}
+
+.error-message {
+  color: #e53935;
+  font-size: small;
 }

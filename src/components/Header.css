@@ -1,0 +1,10 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px;
+  background-color: #2196f3;
+}
+
+.link {
+  padding: 10px;
+}

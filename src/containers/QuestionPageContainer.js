@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import QuestionPage from '../components/QuestionPage'
-import { answerQuestion, endTheAttempt } from '../redux/actions/attempt.actions'
+import { answerQuestion } from '../redux/actions/attempt.actions'
 
 const mapStateToProps = state => {
   const { questions } = state.attempt

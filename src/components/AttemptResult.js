@@ -15,4 +15,10 @@ const AttemptResult = ({ result }) => {
   )
 }
 
+AttemptResult.propTypes = {
+  result: PropTypes.shape({
+    passed: PropTypes.bool
+  })
+}
+
 export default AttemptResult

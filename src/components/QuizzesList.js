@@ -9,6 +9,7 @@ const QuizzesList = ({
   getAllQuizzes,
   makeAnAttemptAndFetchQuestions
 }) => {
+  console.log(quizzes)
   const listElements = quizzes.map((quiz, index) => (
     <QuizzesListElement
       key={index}
@@ -26,7 +27,7 @@ const QuizzesList = ({
   return (
     <div id="QuizzesList">
       Quizzes:
-      {loading ? <p>loading...</p> : null}
+      {loading && quizzes.length === 0 ? <p>loading...</p> : null}
       {listElements}
     </div>
   )
