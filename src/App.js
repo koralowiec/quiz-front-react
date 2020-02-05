@@ -11,6 +11,7 @@ import AttemptResultContainer from './containers/AttemptResultContainer'
 import './App.css'
 import HeaderContainer from './containers/HeaderContainer'
 import FooterContainer from './containers/FooterContainer'
+import SignUpPanelContainer from './containers/SignUpPanelContainer'
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Router>
           <QuizzesListContainer path="/" />
           <LoginPanelContainer path="/login" />
+          <SignUpPanelContainer path="/signup" />
           <QuestionPageContainer path="/quiz" />
           <AttemptResultContainer path="/quiz/result" />
         </Router>

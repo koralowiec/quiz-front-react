@@ -8,4 +8,8 @@ const Footer = ({ username }) => {
   )
 }
 
+Footer.propTypes = {
+  username: PropTypes.string
+}
+
 export default Footer

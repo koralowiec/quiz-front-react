@@ -97,8 +97,6 @@ function* answerQuestion(action) {
     body: body
   }).then(r => r)
 
-  const { isLastQuestion } = action
-
   if (response.status !== 201) {
     console.log('err', response)
     yield put(errorDuringAnsweringTheQuestion())

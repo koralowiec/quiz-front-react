@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import TextField from '@material-ui/core/TextField'
 import './LoginPanel.css'
 import { Button } from '@material-ui/core'
+import { Link } from '@reach/router'
 
 const LoginPanel = ({
   onLogin,
@@ -60,6 +61,7 @@ const LoginPanel = ({
               Log In
             </Button>
           </div>
+          <Link to="/signup">Create a new account</Link>
         </div>
       )}
     </div>

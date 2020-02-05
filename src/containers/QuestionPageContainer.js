@@ -5,7 +5,8 @@ import { answerQuestion } from '../redux/actions/attempt.actions'
 const mapStateToProps = state => {
   const { questions } = state.attempt
   return {
-    questions
+    questions,
+    isLogged: state.auth.logged
   }
 }
 

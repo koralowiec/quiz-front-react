@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import QuestionPanel from './QuestionPanel'
 import './QuestionPage.css'
 
-const QuestionPage = ({ questions, saveAnswer }) => {
+const QuestionPage = ({ questions, saveAnswer, isLogged }) => {
   const [currentQuestionIndex, setCurentQuestionIndex] = useState(0)
 
   const onAnswer = (questionId, checkedOptionIds, isLastQuestion) => {
@@ -28,13 +28,15 @@ const QuestionPage = ({ questions, saveAnswer }) => {
     return panels
   }
 
-  return (
+  return isLogged ? (
     <div id="QuestionPage">
       <p>Question {currentQuestionIndex + 1}:</p>
       <div>
         {questions ? questionPanels()[currentQuestionIndex] : <p>loading...</p>}
       </div>
     </div>
+  ) : (
+    <div>Only logged user can take an attempt</div>
   )
 }
 
@@ -49,7 +51,8 @@ QuestionPage.propTypes = {
         })
       )
     })
-  )
+  ),
+  saveAnswer: PropTypes.func
 }
 
 export default QuestionPage
