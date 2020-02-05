@@ -8,6 +8,7 @@ import {
   endAttemptWatcher
 } from './attempt.saga'
 import { createAnAccountWatcher } from './signUp.saga'
+import { getUserAttemptsWatcher } from './user-attempts.saga'
 
 export default function* rootSaga() {
   yield all([
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     getQuestionsWatcher(),
     answerQuestionWatcher(),
     endAttemptWatcher(),
-    createAnAccountWatcher()
+    createAnAccountWatcher(),
+    getUserAttemptsWatcher()
   ])
 }

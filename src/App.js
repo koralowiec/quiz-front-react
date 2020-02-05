@@ -12,6 +12,7 @@ import './App.css'
 import HeaderContainer from './containers/HeaderContainer'
 import FooterContainer from './containers/FooterContainer'
 import SignUpPanelContainer from './containers/SignUpPanelContainer'
+import UserInfoContainer from './containers/UserInfoContainer'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <SignUpPanelContainer path="/signup" />
           <QuestionPageContainer path="/quiz" />
           <AttemptResultContainer path="/quiz/result" />
+          <UserInfoContainer path="/info" />
         </Router>
         <FooterContainer />
       </div>
