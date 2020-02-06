@@ -1,4 +1,8 @@
-#QuestionPage {
+#question-number {
+  text-align: center;
+}
+
+#question-wrapper {
   display: flex;
   justify-content: center;
 }

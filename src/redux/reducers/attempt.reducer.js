@@ -5,10 +5,11 @@ const initState = {}
 export const attempt = (state = initState, action) => {
   switch (action.type) {
     case types.MAKE_AN_ATTEMPT:
-      return {
-        ...state,
-        creating: true
-      }
+      return Object.assign({}, state, {
+        fullResult: false,
+        creating: true,
+        questions: []
+      })
     case types.MADE_THE_ATTEMPT:
       return Object.assign({}, state, {
         details: action.attempt,
@@ -28,6 +29,10 @@ export const attempt = (state = initState, action) => {
       return Object.assign({}, state, {
         details: action.details
       })
+    case types.END_ATTEMPT:
+      return Object.assign({}, state, { fullResult: false })
+    case types.GOT_FULL_RESULT_OF_ATTEMPT:
+      return Object.assign({}, state, { fullResult: action.fullResult })
     default:
       return state
   }

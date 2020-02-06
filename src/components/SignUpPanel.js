@@ -19,7 +19,6 @@ const SignUpPanel = ({ createAnAccount, error, created }) => {
 
     if (warning.length === 0) {
       createAnAccount(username, password)
-      // console.log(username, password)
     } else {
       setWarningMessage(warning)
     }
@@ -52,7 +51,8 @@ const SignUpPanel = ({ createAnAccount, error, created }) => {
 
 SignUpPanel.propTypes = {
   createAnAccount: PropTypes.func.isRequired,
-  error: PropTypes.bool
+  error: PropTypes.bool,
+  created: PropTypes.bool
 }
 
 export default SignUpPanel

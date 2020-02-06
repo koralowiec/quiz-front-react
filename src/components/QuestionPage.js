@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import QuestionPanel from './QuestionPanel'
 import './QuestionPage.css'
+import { Divider } from '@material-ui/core'
 
 const QuestionPage = ({ questions, saveAnswer, isLogged }) => {
   const [currentQuestionIndex, setCurentQuestionIndex] = useState(0)
@@ -30,8 +31,9 @@ const QuestionPage = ({ questions, saveAnswer, isLogged }) => {
 
   return isLogged ? (
     <div id="QuestionPage">
-      <p>Question {currentQuestionIndex + 1}:</p>
-      <div>
+      <p id="question-number">Question {currentQuestionIndex + 1}:</p>
+      <Divider />
+      <div id="question-wrapper">
         {questions ? questionPanels()[currentQuestionIndex] : <p>loading...</p>}
       </div>
     </div>
@@ -52,7 +54,8 @@ QuestionPage.propTypes = {
       )
     })
   ),
-  saveAnswer: PropTypes.func
+  saveAnswer: PropTypes.func,
+  isLogged: PropTypes.bool
 }
 
 export default QuestionPage

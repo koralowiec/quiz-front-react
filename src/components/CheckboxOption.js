@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FormControlLabel, Checkbox } from '@material-ui/core'
+import { FormControlLabel } from '@material-ui/core'
 import { GrayCheckbox } from './ColorCheckbox'
 
 const CheckboxOption = ({ onCheckboxChanged, text }) => {

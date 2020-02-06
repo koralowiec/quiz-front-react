@@ -58,3 +58,16 @@ export const endedTheAttempt = details => ({
 export const errorDuringEndingTheAttempt = () => ({
   type: types.ERROR_DURING_ENDING_THE_ATTEMPT
 })
+
+export const getFullResultOfTheAttempt = () => ({
+  type: types.GET_FULL_RESULT_OF_ATTEMPT
+})
+
+export const gotFullResultOfAttempt = fullResult => ({
+  type: types.GOT_FULL_RESULT_OF_ATTEMPT,
+  fullResult
+})
+
+export const errorDuringGettingFullResultOfAttempt = () => ({
+  type: types.ERROR_DURING_GETTING_FULL_RESULT_OF_ATTEMPT
+})

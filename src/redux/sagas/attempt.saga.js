@@ -3,7 +3,8 @@ import {
   MAKE_AN_ATTEMPT,
   GET_QUESTIONS_WITH_OPTIONS,
   ANSWER_THE_QUESTION,
-  END_ATTEMPT
+  END_ATTEMPT,
+  GET_FULL_RESULT_OF_ATTEMPT
 } from '../constants/attempt.action-types'
 import {
   madeTheAttempt,
@@ -15,7 +16,10 @@ import {
   answeredTheQuestion,
   endedTheAttempt,
   errorDuringEndingTheAttempt,
-  endTheAttempt
+  endTheAttempt,
+  gotFullResultOfAttempt,
+  errorDuringGettingFullResultOfAttempt,
+  getFullResultOfTheAttempt
 } from '../actions/attempt.actions'
 
 const getToken = state => state.auth.token
@@ -130,6 +134,7 @@ function* endAttempt() {
   if (response.status === 200) {
     const details = yield response.json().then(j => j)
     yield put(endedTheAttempt(details))
+    yield put(getFullResultOfTheAttempt())
   } else {
     console.log('err')
     yield put(errorDuringEndingTheAttempt())
@@ -138,4 +143,31 @@ function* endAttempt() {
 
 export function* endAttemptWatcher() {
   yield takeLatest(END_ATTEMPT, endAttempt)
+}
+
+function* getFullResultOfAttempt() {
+  const token = yield select(getToken)
+  const attemptId = yield select(getAttemptId)
+
+  const url = `http://localhost:3000/api/attempts/${attemptId}`
+  const response = yield fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  }).then(r => r)
+
+  if (response.status === 200) {
+    const result = yield response.json().then(r => r)
+    yield put(gotFullResultOfAttempt(result))
+  } else {
+    console.log('err')
+    yield put(errorDuringGettingFullResultOfAttempt())
+  }
+}
+
+export function* getFullResultOfAttemptWatcher() {
+  yield takeLatest(GET_FULL_RESULT_OF_ATTEMPT, getFullResultOfAttempt)
 }

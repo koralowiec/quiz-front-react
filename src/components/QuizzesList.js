@@ -26,7 +26,7 @@ const QuizzesList = ({
 
   return (
     <div id="QuizzesList">
-      Quizzes:
+      <p id="quizzes-title">Quizzes:</p>
       {loading && quizzes.length === 0 ? <p>loading...</p> : null}
       {listElements}
     </div>

@@ -10,7 +10,7 @@ const UserInfo = ({ getUserAttempts, attempts, error }) => {
 
   return (
     <div id="UserInfo">
-      User attempts:
+      <p id="user-attempts-title">User attempts:</p>
       {error ? <p>Error occured</p> : null}
       {attempts && attempts.length > 0 ? (
         <UserAttempts attempts={attempts} />

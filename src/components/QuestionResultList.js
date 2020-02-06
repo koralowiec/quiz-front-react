@@ -15,6 +15,8 @@ const QuestionResultList = ({ answers }) => {
   return <div>{questionResultElements}</div>
 }
 
-QuestionResultList.propTypes = {}
+QuestionResultList.propTypes = {
+  answers: PropTypes.array
+}
 
 export default QuestionResultList

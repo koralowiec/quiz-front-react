@@ -1,3 +1,7 @@
 #QuizzesList {
   margin: 2%;
 }
+
+#quizzes-title {
+  text-align: center;
+}

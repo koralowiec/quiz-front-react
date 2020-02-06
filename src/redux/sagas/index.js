@@ -5,7 +5,8 @@ import {
   createAnAttemptWatcher,
   getQuestionsWatcher,
   answerQuestionWatcher,
-  endAttemptWatcher
+  endAttemptWatcher,
+  getFullResultOfAttemptWatcher
 } from './attempt.saga'
 import { createAnAccountWatcher } from './signUp.saga'
 import { getUserAttemptsWatcher } from './user-attempts.saga'
@@ -19,6 +20,7 @@ export default function* rootSaga() {
     answerQuestionWatcher(),
     endAttemptWatcher(),
     createAnAccountWatcher(),
-    getUserAttemptsWatcher()
+    getUserAttemptsWatcher(),
+    getFullResultOfAttemptWatcher()
   ])
 }

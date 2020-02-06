@@ -1,15 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import './AttemptResult.css'
+import UserAttemptElement from './UserAttemptElement'
 
-const AttemptResult = ({ result }) => {
+const AttemptResult = ({ result, fullResult }) => {
   return (
-    <div>
-      <p>Result</p>
-      <p>Passed:</p>
-      {result.passed === null ? (
-        <p>loading</p>
+    <div id="AttemptResult">
+      <div id="simple-result-info">
+        <p>Result of the attempt</p>
+        <p>Passed:</p>
+        {result.passed === null ? (
+          <p>loading</p>
+        ) : (
+          <p>{result.passed ? 'yes' : 'no'}</p>
+        )}
+      </div>
+      {fullResult ? (
+        <UserAttemptElement attempt={fullResult} />
       ) : (
-        <p>{result.passed ? 'yes' : 'no'}</p>
+        <p>loading...</p>
       )}
     </div>
   )
@@ -18,6 +27,10 @@ const AttemptResult = ({ result }) => {
 AttemptResult.propTypes = {
   result: PropTypes.shape({
     passed: PropTypes.bool
+  }),
+  fullResult: PropTypes.shape({
+    quiz: PropTypes.object,
+    answers: PropTypes.array
   })
 }
 

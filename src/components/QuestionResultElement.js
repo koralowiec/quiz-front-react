@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './QuestionResultElement.css'
-import { FormControlLabel } from '@material-ui/core'
+import { FormControlLabel, Divider } from '@material-ui/core'
 import NotOkIcon from '@material-ui/icons/Clear'
 import CheckIcon from '@material-ui/icons/Check'
-import { GreenCheckbox, RedCheckbox, GrayCheckbox } from './ColorCheckbox'
+import { GrayCheckbox } from './ColorCheckbox'
 
 const QuestionResultElement = ({ correct, question, checkedOptions }) => {
   const optionElements = question.options.map((option, i) => {
@@ -37,6 +37,7 @@ const QuestionResultElement = ({ correct, question, checkedOptions }) => {
           {correct ? <CheckIcon /> : <NotOkIcon />}
         </div>
       </div>
+      <Divider />
       <div>{optionElements}</div>
     </div>
   )
