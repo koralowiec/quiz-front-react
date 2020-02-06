@@ -1,0 +1,24 @@
+#main-attempt-info {
+  padding: 2%;
+  margin: 2%;
+  background-color: inherit;
+  display: flex;
+  justify-content: space-between;
+}
+
+#quiz-title {
+  font-weight: bold;
+}
+
+#quiz-description {
+  font-weight: lighter;
+}
+
+#more-info-attempt {
+  padding: 2%;
+  margin: 2%;
+}
+
+.expand-icon {
+  margin-top: auto;
+}

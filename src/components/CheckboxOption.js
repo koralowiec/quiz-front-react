@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FormControlLabel, Checkbox } from '@material-ui/core'
+import { GrayCheckbox } from './ColorCheckbox'
 
 const CheckboxOption = ({ onCheckboxChanged, text }) => {
   return (
     <div>
       <FormControlLabel
         control={
-          <Checkbox
+          <GrayCheckbox
             onChange={e => {
               onCheckboxChanged(e.target.checked)
             }}

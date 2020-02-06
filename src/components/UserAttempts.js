@@ -1,12 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import UserAttemptElement from './UserAttemptElement'
 
 const UserAttempts = ({ attempts }) => {
   const attemptElements = attempts.map((attempt, i) => (
-    <div key={i}>
-      <p>{attempt.quiz.title}</p>
-      <p>{attempt.passed.toString()}</p>
-    </div>
+    <UserAttemptElement key={i} attempt={attempt} />
   ))
 
   return <div>{attemptElements}</div>

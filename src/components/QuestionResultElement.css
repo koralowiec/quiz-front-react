@@ -1,0 +1,28 @@
+.QuestionResultElement {
+  background-color: #e0e0e0;
+  padding: 2%;
+  margin: 1%;
+}
+
+#question-result-main-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+}
+
+#question-text {
+  font-weight: normal;
+}
+
+.option {
+  padding: 1%;
+  margin: 1%;
+}
+
+.greenish {
+  background-color: #c5e1a5;
+}
+
+.reddish {
+  background-color: #ffab91;
+}

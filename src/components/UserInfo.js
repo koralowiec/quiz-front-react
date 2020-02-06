@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import UserAttempts from './UserAttempts'
+import './UserInfo.css'
 
 const UserInfo = ({ getUserAttempts, attempts, error }) => {
   useEffect(() => {
@@ -8,11 +9,11 @@ const UserInfo = ({ getUserAttempts, attempts, error }) => {
   }, [])
 
   return (
-    <div>
-      <p>User info</p>
+    <div id="UserInfo">
+      User attempts:
       {error ? <p>Error occured</p> : null}
       {attempts && attempts.length > 0 ? (
-        <UserAttempts attempts={attempts} getUserAttempts={getUserAttempts} />
+        <UserAttempts attempts={attempts} />
       ) : null}
     </div>
   )
