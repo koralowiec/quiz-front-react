@@ -3,7 +3,8 @@ import Header from '../components/Header'
 import { logOut } from '../redux/actions'
 
 const mapStateToProps = state => ({
-  isLogged: state.auth.logged
+  isLogged: state.auth.logged,
+  role: state.auth.userRole
 })
 
 const mapDispatchToProps = dispatch => ({

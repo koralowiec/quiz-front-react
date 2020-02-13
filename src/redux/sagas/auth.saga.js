@@ -16,8 +16,9 @@ function* logInUser(action) {
   if (response.status !== 201) {
     yield put(notLoggedIn())
   } else {
-    const token = yield response.json().then(json => json.token)
-    yield put(loggedIn(token))
+    const json = yield response.json().then(json => json)
+    const { token, role } = json
+    yield put(loggedIn(token, role))
   }
 }
 

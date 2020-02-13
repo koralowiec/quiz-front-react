@@ -6,29 +6,32 @@ import './QuizzesList.css'
 const QuizzesList = ({
   quizzes,
   loading,
-  getAllQuizzes,
-  makeAnAttemptAndFetchQuestions
+  getQuizzes,
+  textOfElementsLeftButton,
+  pathToOfElementsLeftButton,
+  onElementLeftButtonClicked
 }) => {
-  console.log(quizzes)
-  const listElements = quizzes.map((quiz, index) => (
+  const listOfElements = quizzes.map((quiz, index) => (
     <QuizzesListElement
       key={index}
       quiz={quiz}
-      onMakeAnAttemptClick={quizId => {
-        makeAnAttemptAndFetchQuestions(quizId)
+      onButtonOnLeftClicked={quizId => {
+        onElementLeftButtonClicked(quizId)
       }}
+      leftButtonText={textOfElementsLeftButton}
+      leftButtonLinkPath={pathToOfElementsLeftButton}
     />
   ))
 
   useEffect(() => {
-    getAllQuizzes()
+    getQuizzes()
   }, [])
 
   return (
     <div id="QuizzesList">
       <p id="quizzes-title">Quizzes:</p>
       {loading && quizzes.length === 0 ? <p>loading...</p> : null}
-      {listElements}
+      {listOfElements}
     </div>
   )
 }
@@ -36,8 +39,10 @@ const QuizzesList = ({
 QuizzesList.propTypes = {
   quizzes: PropTypes.array,
   loading: PropTypes.bool,
-  getAllQuizzes: PropTypes.func,
-  makeAnAttemptAndFetchQuestions: PropTypes.func
+  getQuizzes: PropTypes.func.isRequired,
+  onElementLeftButtonClicked: PropTypes.func,
+  textOfElementsLeftButton: PropTypes.string,
+  pathToOfElementsLeftButton: PropTypes.string
 }
 
 export default QuizzesList

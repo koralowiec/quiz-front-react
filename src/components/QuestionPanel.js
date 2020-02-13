@@ -7,6 +7,10 @@ import { Link } from '@reach/router'
 const QuestionPanel = ({ question, onAnswer, isLastQuestion }) => {
   const [checkedOptionIds, setCheckedOptionIds] = useState(new Set())
 
+  const imgUrl = question.photoId
+    ? `http://localhost:3000/api/photos/${question.photoId}`
+    : ''
+
   const addCheckedOptionId = optionId => {
     setCheckedOptionIds(prev => new Set(prev.add(optionId)))
   }
@@ -37,6 +41,8 @@ const QuestionPanel = ({ question, onAnswer, isLastQuestion }) => {
   return (
     <div>
       <p>{question.description}</p>
+      {question.snippet ? <div>{question.snippet}</div> : null}
+      {imgUrl !== '' ? <img src={imgUrl}></img> : null}
       {options}
       {isLastQuestion ? (
         <Link to="/quiz/result">
@@ -70,7 +76,9 @@ QuestionPanel.propTypes = {
         id: PropTypes.number.isRequired,
         text: PropTypes.string
       })
-    )
+    ),
+    photoId: PropTypes.number,
+    snippet: PropTypes.string
   }),
   onAnswer: PropTypes.func.isRequired,
   isLastQuestion: PropTypes.bool

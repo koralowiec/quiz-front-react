@@ -7,6 +7,10 @@ import CheckIcon from '@material-ui/icons/Check'
 import { GrayCheckbox } from './ColorCheckbox'
 
 const QuestionResultElement = ({ correct, question, checkedOptions }) => {
+  const imgUrl = question.photoId
+    ? `http://localhost:3000/api/photos/${question.photoId}`
+    : ''
+
   const optionElements = question.options.map((option, i) => {
     let colorClassName = ''
     const checkedOption = checkedOptions.find(el => el.optionId === option.id)
@@ -37,6 +41,12 @@ const QuestionResultElement = ({ correct, question, checkedOptions }) => {
           {correct ? <CheckIcon /> : <NotOkIcon />}
         </div>
       </div>
+      {imgUrl !== '' ? (
+        <img src={imgUrl} className="question-image"></img>
+      ) : null}
+      {question.snippet ? (
+        <div className="question-snippet">{question.snippet}</div>
+      ) : null}
       <Divider />
       <div>{optionElements}</div>
     </div>
@@ -52,7 +62,9 @@ QuestionResultElement.propTypes = {
         text: PropTypes.string.isRequired,
         isCorrect: PropTypes.bool.isRequired
       })
-    )
+    ),
+    photoId: PropTypes.number,
+    snippet: PropTypes.string
   }).isRequired,
   checkedOptions: PropTypes.arrayOf(
     PropTypes.shape({

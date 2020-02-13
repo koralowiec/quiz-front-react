@@ -1,10 +1,23 @@
 header {
-  display: flex;
-  justify-content: space-between;
   padding: 6px;
   background-color: #6ec6ff;
 }
 
+#header-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
 .link {
   padding: 10px;
+}
+
+#right-side-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#restricted-right-side-header {
+  display: flex;
+  justify-content: space-between;
 }

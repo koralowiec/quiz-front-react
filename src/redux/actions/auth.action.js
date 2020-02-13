@@ -6,9 +6,10 @@ export const logIn = (username, password) => ({
   password
 })
 
-export const loggedIn = token => ({
+export const loggedIn = (token, userRole) => ({
   type: types.LOGGED_IN,
-  token
+  token,
+  userRole
 })
 
 export const notLoggedIn = () => ({

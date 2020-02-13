@@ -26,3 +26,14 @@
 .reddish {
   background-color: #ffab91;
 }
+
+.question-image {
+  display: block;
+  margin: auto;
+  padding: 1%;
+}
+
+.question-snippet {
+  white-space: pre-line;
+  padding: 1%;
+}

@@ -5,12 +5,14 @@ import { makeAnAttempt } from '../redux/actions/attempt.actions'
 
 const mapStateToProps = state => ({
   quizzes: state.quizzes.quizzes,
-  loading: state.quizzes.loading
+  loading: state.quizzes.loading,
+  textOfElementsLeftButton: 'Make an attempt',
+  pathToOfElementsLeftButton: '/quiz'
 })
 
 const mapDispatchToProps = dispatch => ({
-  getAllQuizzes: () => dispatch(getAllQuizzes()),
-  makeAnAttemptAndFetchQuestions: quizId => dispatch(makeAnAttempt(quizId))
+  getQuizzes: () => dispatch(getAllQuizzes()),
+  onElementLeftButtonClicked: quizId => dispatch(makeAnAttempt(quizId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuizzesList)

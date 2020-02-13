@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { TextField, Button } from '@material-ui/core'
 import './SignUpPanel.css'
 
-const SignUpPanel = ({ createAnAccount, error, created }) => {
+const SignUpPanel = ({ createAnAccount, created }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [wariningMessage, setWarningMessage] = useState('')

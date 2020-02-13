@@ -4,20 +4,25 @@ import './QuizzesListElement.css'
 import { Button } from '@material-ui/core'
 import { Link } from '@reach/router'
 
-const QuizzesListElement = ({ quiz, onMakeAnAttemptClick }) => {
+const QuizzesListElement = ({
+  quiz,
+  onButtonOnLeftClicked,
+  leftButtonText,
+  leftButtonLinkPath
+}) => {
   return (
     <div id="QuizzesListElement">
       <div>
         <div id="quiz-title">{quiz.title}</div>
         <div id="quiz-description">{quiz.description}</div>
       </div>
-      <Link to="/quiz">
+      <Link to={leftButtonLinkPath}>
         <Button
           onClick={() => {
-            onMakeAnAttemptClick(quiz.id)
+            onButtonOnLeftClicked(quiz.id)
           }}
         >
-          Make an attempt
+          {leftButtonText}
         </Button>
       </Link>
     </div>
@@ -30,7 +35,9 @@ QuizzesListElement.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string
   }).isRequired,
-  onMakeAnAttemptClick: PropTypes.func.isRequired
+  onButtonOnLeftClicked: PropTypes.func.isRequired,
+  leftButtonText: PropTypes.string,
+  leftButtonLinkPath: PropTypes.string
 }
 
 export default QuizzesListElement

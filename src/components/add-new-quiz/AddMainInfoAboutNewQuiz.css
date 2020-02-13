@@ -1,0 +1,14 @@
+#AddMainInfoAboutNewQuiz {
+  display: flex;
+  justify-content: center;
+  padding: 3%;
+}
+
+#AddMainInfoAboutNewQuiz-input {
+  display: inline-grid;
+  grid-template-columns: auto;
+}
+
+#AddMainInfoAboutNewQuiz-input > div {
+  padding: 2%;
+}

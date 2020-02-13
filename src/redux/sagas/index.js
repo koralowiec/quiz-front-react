@@ -10,6 +10,13 @@ import {
 } from './attempt.saga'
 import { createAnAccountWatcher } from './signUp.saga'
 import { getUserAttemptsWatcher } from './user-attempts.saga'
+import { getManageableQuizzesWatcher } from './manageable-quizzes.saga'
+import {
+  createNewQuizWatcher,
+  changeAvailabilityWatcher,
+  saveQuestionWatcher,
+  savePictureWatcher
+} from './new-quiz.saga'
 
 export default function* rootSaga() {
   yield all([
@@ -21,6 +28,11 @@ export default function* rootSaga() {
     endAttemptWatcher(),
     createAnAccountWatcher(),
     getUserAttemptsWatcher(),
-    getFullResultOfAttemptWatcher()
+    getFullResultOfAttemptWatcher(),
+    getManageableQuizzesWatcher(),
+    createNewQuizWatcher(),
+    changeAvailabilityWatcher(),
+    saveQuestionWatcher(),
+    savePictureWatcher()
   ])
 }
