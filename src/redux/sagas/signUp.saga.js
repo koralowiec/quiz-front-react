@@ -4,23 +4,28 @@ import {
   createdAnAccount
 } from '../actions/signUp.action'
 import { CREATE_AN_ACCOUNT } from '../constants/ActionTypes'
+import API from '../../utils/API'
 
 function* createAnAccount(action) {
   const { username, password } = action
-  const url = 'http://localhost:3000/api/auth/signUp'
-  const response = yield fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ username, password })
-  }).then(r => r)
+  const url = '/auth/signUp'
 
-  if (response.status !== 201) {
-    yield put(errorDuringCreatingAnAccount(response))
-  } else {
+  try {
+    yield API.post(
+      url,
+      { username, password },
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then(res => res)
+
     yield put(createdAnAccount())
+  } catch (error) {
+    console.error(error)
+    yield put(errorDuringCreatingAnAccount(error))
   }
 }
 

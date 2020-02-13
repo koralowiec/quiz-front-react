@@ -5,6 +5,8 @@ import Option from './Option'
 import NewOption from './NewOption'
 import './QuestionInNewQuiz.css'
 
+const API_URL = process.env.API_URL
+
 const QuestionInNewQuiz = ({
   question,
   editDescription,
@@ -13,7 +15,7 @@ const QuestionInNewQuiz = ({
   saveQuestion,
   savePicture
 }) => {
-  const { options, description, snippet, id } = question
+  const { options, description, snippet, id, photoId } = question
 
   const isSaved = id
 
@@ -36,6 +38,7 @@ const QuestionInNewQuiz = ({
             multiline
           />
         </div>
+        {photoId ? <img src={`${API_URL}/photos/${photoId}`}></img> : null}
         <div>
           {isSaved && !snippet ? null : (
             <InputBase
@@ -77,7 +80,8 @@ QuestionInNewQuiz.propTypes = {
     options: PropTypes.array,
     description: PropTypes.string,
     snippet: PropTypes.string,
-    id: PropTypes.number
+    id: PropTypes.number.isRequired,
+    photoId: PropTypes.number
   }),
   editDescription: PropTypes.func,
   editSnippet: PropTypes.func,

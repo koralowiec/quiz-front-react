@@ -21,30 +21,36 @@ import {
   errorDuringGettingFullResultOfAttempt,
   getFullResultOfTheAttempt
 } from '../actions/attempt.actions'
+import API from '../../utils/API'
 
 const getToken = state => state.auth.token
 
 function* createAnAttempt(action) {
   const { quizId } = action
   const token = yield select(getToken)
-  const response = yield fetch('http://localhost:3000/api/attempts/', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      quizId
-    })
-  }).then(r => r)
 
-  if (response.status !== 201) {
-    yield put(errorDuringMakingTheAttempt())
-  } else {
-    const madeAttempt = yield response.json().then(a => a)
-    yield put(madeTheAttempt(madeAttempt))
+  const url = '/attempts/'
+
+  try {
+    const response = yield API.post(
+      url,
+      {
+        quizId
+      },
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+    ).then(res => res)
+
+    yield put(madeTheAttempt(response.data))
     yield put(getQuestionsWithOptions())
+  } catch (error) {
+    console.error(error)
+    yield put(errorDuringMakingTheAttempt())
   }
 }
 
@@ -56,15 +62,20 @@ const getQuizId = state => state.attempt.details.quizId
 
 function* getQuestions() {
   const quizId = yield select(getQuizId)
-  const url = `http://localhost:3000/api/quizzes/${quizId}/questions/`
-  const response = yield fetch(url).then(r => r)
+  const url = `/quizzes/${quizId}/questions/`
 
-  if (response.status !== 200) {
-    console.log('err')
+  try {
+    const response = yield API.get(url, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res)
+
+    yield put(gotQuestionsWithOptions(response.data))
+  } catch (error) {
+    console.error(error)
     yield put(errorDuringGettingQuestionsWithOptios())
-  } else {
-    const questions = yield response.json(q => q)
-    yield put(gotQuestionsWithOptions(questions))
   }
 }
 
@@ -83,33 +94,32 @@ function* answerQuestion(action) {
   })
   const token = yield select(getToken)
   const attemptId = yield select(getAttemptId)
-  const url = `http://localhost:3000/api/attempts/${attemptId}/answers`
-  const body = JSON.stringify({
+  const url = `/attempts/${attemptId}/answers`
+
+  const body = {
     answer: {
       questionId: questionId
     },
     checkedOptions: checkedOptions
-  })
+  }
 
-  const response = yield fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: body
-  }).then(r => r)
+  try {
+    yield API.post(url, body, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => res)
 
-  if (response.status !== 201) {
-    console.log('err', response)
-    yield put(errorDuringAnsweringTheQuestion())
-  } else {
     yield put(answeredTheQuestion())
     const { isLastQuestion } = action
     if (isLastQuestion) {
       yield put(endTheAttempt())
     }
+  } catch (error) {
+    console.error(error)
+    yield put(errorDuringAnsweringTheQuestion())
   }
 }
 
@@ -121,22 +131,23 @@ function* endAttempt() {
   const token = yield select(getToken)
   const attemptId = yield select(getAttemptId)
 
-  const url = `http://localhost:3000/api/attempts/${attemptId}/passed`
-  const response = yield fetch(url, {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    }
-  }).then(r => r)
+  const url = `/attempts/${attemptId}/passed`
 
-  if (response.status === 200) {
-    const details = yield response.json().then(j => j)
-    yield put(endedTheAttempt(details))
+  try {
+    const response = yield API.patch(
+      url,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    ).then(res => res)
+
+    yield put(endedTheAttempt(response.data))
     yield put(getFullResultOfTheAttempt())
-  } else {
-    console.log('err')
+  } catch (error) {
+    console.error(error)
     yield put(errorDuringEndingTheAttempt())
   }
 }
@@ -149,21 +160,20 @@ function* getFullResultOfAttempt() {
   const token = yield select(getToken)
   const attemptId = yield select(getAttemptId)
 
-  const url = `http://localhost:3000/api/attempts/${attemptId}`
-  const response = yield fetch(url, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    }
-  }).then(r => r)
+  const url = `/attempts/${attemptId}`
 
-  if (response.status === 200) {
-    const result = yield response.json().then(r => r)
-    yield put(gotFullResultOfAttempt(result))
-  } else {
-    console.log('err')
+  try {
+    const response = yield API.get(url, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => res)
+
+    yield put(gotFullResultOfAttempt(response.data))
+  } catch (error) {
+    console.error(error)
     yield put(errorDuringGettingFullResultOfAttempt())
   }
 }

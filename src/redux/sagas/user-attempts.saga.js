@@ -4,26 +4,27 @@ import {
   gotUserAttempts
 } from '../actions/user-attemps.actions'
 import { GET_USER_ATTEMPTS } from '../constants/user-attempts.action-types'
+import API from '../../utils/API'
 
 const getToken = state => state.auth.token
 
 function* getUserAttempts() {
   const token = yield select(getToken)
-  const url = 'http://localhost:3000/api/attempts/'
-  const response = yield fetch(url, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    }
-  }).then(r => r)
+  const url = '/attempts/'
 
-  if (response.status !== 200) {
-    console.error('err', response)
+  try {
+    const response = yield API.get(url, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => res)
+
+    yield put(gotUserAttempts(response.data))
+  } catch (error) {
+    console.error(error)
     yield put(errorDuringGettingUserAttempts())
-  } else {
-    const attempts = yield response.json().then(j => j)
-    yield put(gotUserAttempts(attempts))
   }
 }
 

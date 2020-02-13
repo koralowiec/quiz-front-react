@@ -1,5 +1,4 @@
 import { put, takeLatest, select } from 'redux-saga/effects'
-import axios from 'axios'
 import {
   createdNewQuiz,
   errorDuringCreatingNewQuiz,
@@ -14,6 +13,7 @@ import {
   SAVE_QUESTION,
   ADD_AND_SAVE_PICTURE
 } from '../constants/new-quiz.action-types'
+import API from '../../utils/API'
 
 const getToken = state => state.auth.token
 
@@ -28,23 +28,21 @@ function* createNewQuiz() {
 
   console.log(title, description)
 
-  const url = 'http://localhost:3000/api/quizzes'
+  const url = '/quizzes'
 
   try {
-    const response = yield axios
-      .post(
-        url,
-        {
-          title,
-          description
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+    const response = yield API.post(
+      url,
+      {
+        title,
+        description
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-      )
-      .then(res => res)
+      }
+    ).then(res => res)
 
     console.log(response)
     yield put(createdNewQuiz(response.data.id, response.data.available))
@@ -65,22 +63,20 @@ function* changeAvailability(action) {
   const quizId = yield select(getNewQuizId)
   const available = action.isAvailable
 
-  const url = `http://localhost:3000/api/quizzes/${quizId}/available`
+  const url = `/quizzes/${quizId}/available`
 
   try {
-    const response = yield axios
-      .patch(
-        url,
-        {
-          available
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+    const response = yield API.patch(
+      url,
+      {
+        available
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
-      )
-      .then(res => res)
+      }
+    ).then(res => res)
 
     console.log(response)
     yield put(changedAvailability())
@@ -104,16 +100,14 @@ function* saveQuestion(action) {
 
   console.log('saga', question)
 
-  const url = `http://localhost:3000/api/quizzes/${quizId}/questions/`
+  const url = `/quizzes/${quizId}/questions/`
 
   try {
-    const response = yield axios
-      .post(url, question, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(res => res)
+    const response = yield API.post(url, question, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res => res)
 
     console.log(response)
     yield put(savedQuestion(questionIndex, response.data.id))
@@ -128,13 +122,13 @@ export function* saveQuestionWatcher() {
 
 function* savePicture(action) {
   const { questionIndex, picture } = action
-  const url = 'http://localhost:3000/api/photos'
+  const url = '/photos'
 
   const data = new FormData()
   data.append('file', picture)
 
   try {
-    const res = yield axios.post(url, data).then(res => res)
+    const res = yield API.post(url, data).then(res => res)
 
     yield put(savedPicture(questionIndex, res.data.id))
   } catch (error) {
